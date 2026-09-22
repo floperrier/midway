@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Midway — painted carnival signage.
+   Surfaces are flat enamel, not floating cards: hairline rules do the dividing,
+   radii stay tight, and nothing casts a shadow. */
+
+:root {
+  --radius: 0.25rem;
+
+  /* palette */
+  --booth: #0f3b32; /* painted enamel green — chrome and primary actions */
+  --booth-deep: #0a2a24;
+  --ticket: #f2c14e; /* ticket stock — prizes, live state, the one bright note */
+  --flag: #c8452f; /* painted red — destructive only */
+
+  --background: #fbfaf7;
+  --foreground: #14211e;
+  --card: #ffffff;
+  --card-foreground: #14211e;
+  --popover: #ffffff;
+  --popover-foreground: #14211e;
+  --primary: #0f3b32;
+  --primary-foreground: #fbfaf7;
+  --secondary: #eceadf;
+  --secondary-foreground: #14211e;
+  --muted: #f1efe6;
+  --muted-foreground: #5c6b66;
+  --accent: #eceadf;
+  --accent-foreground: #14211e;
+  --destructive: #c8452f;
+  --destructive-foreground: #fbfaf7;
+  --border: #ddd9cc;
+  --input: #ddd9cc;
+  --ring: #0f3b32;
+
+  --sidebar: #0f3b32;
+  --sidebar-foreground: #dce8e2;
+  --sidebar-primary: #f2c14e;
+  --sidebar-primary-foreground: #0f3b32;
+  --sidebar-accent: #17493e;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1d5a4c;
+  --sidebar-ring: #f2c14e;
+}
+
+.dark {
+  --booth: #12332c;
+  --booth-deep: #0a1c18;
+  --ticket: #f2c14e;
+  --flag: #e4674f;
+
+  --background: #0d1714;
+  --foreground: #e9e6db;
+  --card: #132420;
+  --card-foreground: #e9e6db;
+  --popover: #132420;
+  --popover-foreground: #e9e6db;
+  --primary: #f2c14e;
+  --primary-foreground: #14211e;
+  --secondary: #1c302a;
+  --secondary-foreground: #e9e6db;
+  --muted: #1a2c27;
+  --muted-foreground: #97a8a1;
+  --accent: #1c302a;
+  --accent-foreground: #e9e6db;
+  --destructive: #e4674f;
+  --destructive-foreground: #14211e;
+  --border: #244038;
+  --input: #2a4a41;
+  --ring: #f2c14e;
+
+  --sidebar: #0a1c18;
+  --sidebar-foreground: #cadbd4;
+  --sidebar-primary: #f2c14e;
+  --sidebar-primary-foreground: #0a1c18;
+  --sidebar-accent: #16302a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1d3a33;
+  --sidebar-ring: #f2c14e;
+}
+
+@theme inline {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", "Archivo", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --color-booth: var(--booth);
+  --color-booth-deep: var(--booth-deep);
+  --color-ticket: var(--ticket);
+  --color-flag: var(--flag);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* Native controls, scrollbars and form widgets follow the theme. */
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  /* Drop the synthetic 300ms tap delay without disabling pinch zoom. */
+  button,
+  a,
+  [role="button"],
+  label,
+  select,
+  summary {
+    touch-action: manipulation;
+  }
+  /* Enamel signage: painted flat, never floating. */
+  [data-slot="card"] {
+    box-shadow: none;
+  }
+}
+
+@layer components {
+  /* Fairground poster numerals — the one loud voice in the interface. */
+  .numeral {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.9;
+  }
+
+  /* Native constraint validation, revealed only after the user commits to a
+     value. :user-invalid is Baseline widely available (2023-11), no fallback. */
+  .field :is(input, select, textarea):user-invalid {
+    border-color: var(--destructive);
+  }
+  .field:has(:is(input, select, textarea):user-invalid) .field-error {
+    display: flex;
+  }
+  .field-error {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: var(--destructive);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

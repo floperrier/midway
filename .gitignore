@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.output/
+.wrangler/
+.vinxi/
+.dev.vars
+.env
+.DS_Store
+src/routeTree.gen.ts
+
+# tooling
+.serena/

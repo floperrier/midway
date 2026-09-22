@@ -10,3 +10,6 @@ dist/
 
 # tooling
 .serena/
+
+# verification run artifacts
+.claude/skills/verify/artifacts/

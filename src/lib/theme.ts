@@ -30,6 +30,9 @@ export function useTheme() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Reading localStorage during render would hydrate against a server pass
+    // that cannot see it, so the stored theme has to land after mount.
+    // oxlint-disable-next-line react/set-state-in-effect
     setThemeState(read());
     setMounted(true);
   }, []);

@@ -1,0 +1,9 @@
+# Copy to .dev.vars before `pnpm dev`. Both auth vars are required: the app
+# refuses to start without them rather than falling back to an insecure default.
+BETTER_AUTH_SECRET=generate-with-openssl-rand-hex-32
+BETTER_AUTH_URL=http://localhost:3200
+TRUSTED_ORIGINS=http://localhost:3200
+
+# Optional. Google sign-in stays off until both are filled in.
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=

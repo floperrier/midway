@@ -5,6 +5,8 @@
   "compatibility_flags": ["nodejs_compat"],
   "account_id": "5d56adf1b46adbf4e5de5d5b570ce60f",
   "main": "@tanstack/react-start/server-entry",
+  // Off by default, which leaves a deployed Worker with no logs to read.
+  "observability": { "enabled": true },
   "d1_databases": [
     {
       "binding": "DB",

@@ -3,10 +3,10 @@ dist/
 .output/
 .wrangler/
 .vinxi/
+.tanstack/
 .dev.vars
 .env
 .DS_Store
-src/routeTree.gen.ts
 
 # tooling
 .serena/

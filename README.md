@@ -16,18 +16,23 @@ React 19 · Tailwind v4 + shadcn/ui · D1 + Drizzle · better-auth.
 
 ```bash
 pnpm install
+cp .dev.vars.example .dev.vars   # then put a real secret in it
 pnpm db:migrate:local
 pnpm dev                 # http://localhost:3200
 ```
 
-Port 3200 is pinned with `strictPort`. `BETTER_AUTH_URL` in `.dev.vars` must
-match the dev URL exactly or auth fails silently.
+Port 3200 is pinned with `strictPort`. `BETTER_AUTH_SECRET` and
+`BETTER_AUTH_URL` are required — `getAuth()` throws when either is missing,
+because better-auth otherwise falls back to a published default secret that
+would let anyone forge a session. `BETTER_AUTH_URL` must match the dev URL
+exactly.
 
 | Command | What it does |
 |---|---|
 | `pnpm dev` | Dev server with local D1 |
 | `pnpm build` | Build client + SSR bundles |
 | `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm lint` | oxlint, warnings are errors |
 | `pnpm test` | Prize-draw unit check |
 | `pnpm verify` | Integration check against a running dev server |
 | `pnpm db:generate` | Generate a migration from the schema |
@@ -101,7 +106,9 @@ pnpm deploy
 ```
 
 `BETTER_AUTH_URL` must equal the live origin exactly — no trailing slash.
-`wrangler secret put` does not redeploy on its own.
+`wrangler secret put` does not redeploy on its own. A deploy missing either
+secret fails loudly on the first request rather than serving forgeable
+sessions.
 
 ### Google OAuth
 

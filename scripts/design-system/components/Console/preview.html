@@ -1,0 +1,68 @@
+<!-- @dsCard group="Pages" height=820 width=1200 page subtitle="The dashboard, built from the bundle and the routes' markup; example data" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Console</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var M = window.Midway, h = React.createElement, I = M.icons;
+  function icon(C, cls) { return h(C, { className: cls || "size-4", "aria-hidden": true }); }
+  var LINK = "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring flex items-center gap-2.5 rounded px-3 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none";
+  var ACTIVE = " bg-sidebar-accent text-sidebar-accent-foreground font-medium";
+  var NAV = [["Dashboard", I.LayoutGrid, true], ["Brands", I.Store, false], ["Campaigns", I.Ticket, false]];
+  var ROWS = [
+    ["Harvest drop", "Quillfen Tea", "live", 864],
+    ["Summer swim sale", "Tidewater Swim", "live", 512],
+    ["Candle club spin", "Kettlebrook Candles", "live", 431],
+    ["Gift guide scratch", "Harbor & Hide", "draft", 0],
+    ["Spring restock", "Quillfen Tea", "ended", 348]
+  ];
+  function Booth() {
+    return h("div", { className: "flex h-full flex-col gap-8 p-4" },
+      h("a", { href: "#dashboard", className: "numeral text-ticket px-2 text-2xl" }, "MIDWAY"),
+      h("nav", { className: "grid gap-0.5", "aria-label": "Main" },
+        NAV.map(function (n) {
+          return h("a", { key: n[0], href: "#" + n[0].toLowerCase(), className: LINK + (n[2] ? ACTIVE : ""), "aria-current": n[2] ? "page" : undefined }, icon(n[1], "size-4 shrink-0"), n[0]);
+        })),
+      h("div", { className: "border-sidebar-border mt-auto grid gap-2 border-t pt-4" },
+        h("p", { className: "text-sidebar-foreground/60 truncate px-3 text-xs" }, "alex@example.com"),
+        h(M.Button, { variant: "ghost", size: "sm", className: "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground justify-start" }, "Sign out")));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h("div", { className: "min-h-dvh md:grid md:grid-cols-[15rem_1fr]" },
+      h("a", { href: "#main", className: "bg-background text-foreground focus:ring-ring sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded focus:px-4 focus:py-2 focus:ring-2" }, "Skip to content"),
+      h("aside", { className: "bg-sidebar hidden md:block" }, h(Booth)),
+      h("div", { className: "flex min-w-0 flex-col" },
+        h("header", { className: "border-border flex items-center gap-2 border-b px-4 py-3 md:justify-end" },
+          h("div", { className: "ml-auto md:ml-0" },
+            h(M.Button, { type: "button", variant: "ghost", size: "sm", "aria-label": "Theme: System. Switch to Light.", title: "Theme: System" },
+              icon(I.Monitor), h("span", { className: "sr-only sm:not-sr-only sm:ml-1.5 sm:text-xs" }, "System")))),
+        h("main", { id: "main", tabIndex: -1, className: "min-w-0 flex-1 px-4 py-8 md:px-8 md:py-10" },
+          h("div", { className: "mx-auto max-w-5xl" },
+            h("h1", { className: "numeral text-4xl md:text-5xl" }, "Dashboard"),
+            h("p", { className: "text-muted-foreground mt-3 max-w-[60ch] text-sm leading-relaxed" }, "Every booth you have running, and what it has collected."),
+            h("div", { className: "mt-8" },
+              h(M.ScoreStrip, { scores: [
+                { label: "Leads captured", value: "2,418" },
+                { label: "Signup rate", value: "11.2%", note: "Merchants running stock spin wheels report 5–14%." },
+                { label: "Live campaigns", value: 3 },
+                { label: "Brands", value: 4 }
+              ] })),
+            h("section", { className: "mt-12" },
+              h("div", { className: "flex items-baseline justify-between gap-4" },
+                h("h2", { className: "text-lg font-semibold" }, "Recent campaigns"),
+                h("a", { href: "#campaigns", className: "text-sm underline" }, "All campaigns")),
+              h("ul", { className: "border-border divide-border mt-4 divide-y rounded-md border" },
+                ROWS.map(function (r) {
+                  return h("li", { key: r[0] },
+                    h("a", { href: "#campaign", className: "hover:bg-muted/60 flex flex-wrap items-center gap-x-4 gap-y-1 px-5 py-4 transition-colors" },
+                      h("span", { className: "font-medium" }, r[0]),
+                      h("span", { className: "text-muted-foreground text-sm" }, r[1]),
+                      h(M.StatusChip, { status: r[2] }),
+                      h("span", { className: "numeral ml-auto text-xl" }, r[3]),
+                      h("span", { className: "text-muted-foreground text-xs" }, "leads")));
+                })))))))
+  );
+</script>
+</body>
+</html>

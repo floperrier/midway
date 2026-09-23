@@ -1,0 +1,32 @@
+<!-- @dsCard group="Forms" height=384 subtitle="Label, hint above, error below; the password field shows its error state" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Field</title>
+<style>
+  /* The password field held in the state it reaches once the user leaves it too short. */
+  .demo-invalid .field-error { display: flex; }
+</style>
+</head>
+<body>
+<div id="root" class="max-w-sm p-6"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  var SELECT = "border-input bg-transparent dark:bg-input/30 h-9 w-full rounded-md border px-3 py-1 text-sm shadow-xs focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:outline-none";
+  var MECHANICS = [["spin", "Spin wheel"], ["scratch", "Scratch card"], ["flick", "Flick"], ["drag", "Drag"], ["shoot", "Shoot"]];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(M.ValidatedForm, { className: "grid gap-5", onSubmit: function (e) { e.preventDefault(); } },
+      h(M.Field, { label: "Email", error: "Enter a valid email address." },
+        h(M.Input, { type: "email", name: "email", required: true, autoComplete: "email", spellCheck: false, autoCapitalize: "none", placeholder: "you@agency.com" })),
+      h("div", { className: "demo-invalid" },
+        h(M.Field, { label: "Password", hint: "At least 8 characters.", error: "Use at least 8 characters." },
+          h(M.Input, { type: "password", name: "password", required: true, minLength: 8, autoComplete: "new-password", defaultValue: "tent", "aria-invalid": true }))),
+      h("div", { className: "field grid gap-1.5" },
+        h("label", { className: "text-sm font-medium", htmlFor: "mechanic" }, "Mechanic"),
+        h("select", { id: "mechanic", name: "mechanic", className: SELECT, defaultValue: "flick" },
+          MECHANICS.map(function (m) { return h("option", { key: m[0], value: m[0] }, m[1]); }))),
+      h(M.Button, { type: "submit", className: "w-full" }, "Create account")
+    )
+  );
+</script>
+</body>
+</html>

@@ -15,3 +15,5 @@ dist/
 .claude/skills/verify/artifacts/
 
 .claude/worktrees/
+
+scripts/design-system/out/

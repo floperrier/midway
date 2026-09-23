@@ -45,6 +45,7 @@ worktrees run side by side. The main checkout is refused and keeps port 3200.
 | `pnpm db:generate` | Generate a migration from the schema |
 | `pnpm db:migrate:local` / `:remote` | Apply migrations |
 | `pnpm deploy` | Build and ship to Workers |
+| `pnpm design-system` | Rebuild the design system's tokens and component bundle into `scripts/design-system/out/` |
 
 ## How it's put together
 

@@ -1,0 +1,16 @@
+<!-- @dsCard group="Feedback" height=200 subtitle="A success and a failure, held open" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Toaster</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(h(M.Toaster, { position: "top-right", expand: true }));
+  setTimeout(function () {
+    M.toast.success("Campaign saved", { duration: Infinity });
+    M.toast.error("That campaign could not be created.", { duration: Infinity });
+  }, 60);
+</script>
+</body>
+</html>

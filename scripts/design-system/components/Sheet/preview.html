@@ -1,0 +1,38 @@
+<!-- @dsCard group="Navigation" height=640 width=390 subtitle="The console's mobile menu, open" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Sheet</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var M = window.Midway, h = React.createElement, I = M.icons;
+  function icon(C, cls) { return h(C, { className: cls || "size-4", "aria-hidden": true }); }
+  var LINK = "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring flex items-center gap-2.5 rounded px-3 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none";
+  var ACTIVE = " bg-sidebar-accent text-sidebar-accent-foreground font-medium";
+  var NAV = [["Dashboard", I.LayoutGrid, true], ["Brands", I.Store, false], ["Campaigns", I.Ticket, false]];
+  function Booth() {
+    return h("div", { className: "flex h-full flex-col gap-8 p-4" },
+      h("a", { href: "#dashboard", className: "numeral text-ticket px-2 text-2xl" }, "MIDWAY"),
+      h("nav", { className: "grid gap-0.5", "aria-label": "Main" },
+        NAV.map(function (n) {
+          return h("a", { key: n[0], href: "#" + n[0].toLowerCase(), className: LINK + (n[2] ? ACTIVE : ""), "aria-current": n[2] ? "page" : undefined }, icon(n[1], "size-4 shrink-0"), n[0]);
+        })),
+      h("div", { className: "border-sidebar-border mt-auto grid gap-2 border-t pt-4" },
+        h("p", { className: "text-sidebar-foreground/60 truncate px-3 text-xs" }, "alex@example.com"),
+        h(M.Button, { variant: "ghost", size: "sm", className: "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground justify-start" }, "Sign out")));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h("div", { className: "min-h-dvh" },
+      h("header", { className: "border-border flex items-center gap-2 border-b px-4 py-3" },
+        h(M.Sheet, { defaultOpen: true },
+          h(M.SheetTrigger, { asChild: true },
+            h(M.Button, { variant: "ghost", size: "icon" }, icon(I.Menu, "size-5"), h("span", { className: "sr-only" }, "Open menu"))),
+          h(M.SheetContent, { side: "left", className: "bg-sidebar w-64 p-0", onOpenAutoFocus: function (e) { e.preventDefault(); } },
+            h(M.SheetTitle, { className: "sr-only" }, "Menu"),
+            h(Booth))),
+        h("span", { className: "numeral text-ticket text-xl" }, "MIDWAY"))
+    )
+  );
+</script>
+</body>
+</html>

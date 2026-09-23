@@ -26,27 +26,37 @@ every mutation is an HTTP call the browser also makes. Drive it with `curl`,
 The app needs a local D1 and two auth secrets; `getAuth()` throws rather than
 fall back to better-auth's published default key.
 
+Run everything from the root of the checkout you are verifying. In a git
+worktree that is the worktree, not the main checkout.
+
 ```bash
-cd /Users/f.perrier/projects/midway
-pnpm install                              # first run only
-[ -f .dev.vars ] || cp .dev.vars.example .dev.vars   # then put a real secret in it
+cd "$(git rev-parse --show-toplevel)"
+[ -f .dev.vars ] || pnpm setup:worktree   # worktree: own port, .dev.vars, migrated + seeded D1
+pnpm install                              # main checkout, first run only
 pnpm db:migrate:local
-pnpm dev                                  # http://localhost:3200
+BASE=$(grep '^BETTER_AUTH_URL=' .dev.vars | cut -d= -f2)
+pnpm dev                                  # serves $BASE
 ```
 
-**Reuse the server that is already running.** The port is pinned with
-`strictPort: true`, so a second `pnpm dev` dies instead of picking another port,
-and a run started with `--port 3399` still shares `.wrangler/state`, so its D1
-is the same database. Check before starting anything:
+In the main checkout `setup:worktree` refuses to run; create `.dev.vars` there
+from `.dev.vars.example` by hand. The port comes from `BETTER_AUTH_URL`, so
+`$BASE` and the dev server cannot disagree.
+
+**Reuse this checkout's server if it is already running.** The port is pinned
+with `strictPort: true`, so a second `pnpm dev` in the same checkout dies
+instead of picking another port, and a run started there with `--port 3399`
+still shares that checkout's `.wrangler/state`, so its D1 is the same database.
+Another worktree has its own `.wrangler/state` and its own port, so it neither
+blocks nor shares data with this one. Check before starting anything:
 
 ```bash
-lsof -i :3200 -sTCP:LISTEN
+lsof -i :"${BASE##*:}" -sTCP:LISTEN
 ```
 
 Ready when `/login` answers 200 (cold start compiles for a few seconds):
 
 ```bash
-until curl -sf -o /dev/null http://localhost:3200/login; do sleep 1; done
+until curl -sf -o /dev/null $BASE/login; do sleep 1; done
 ```
 
 **Teardown.** Only if *this run* started the server. Record the PID at launch
@@ -54,7 +64,8 @@ and kill that PID — never `pkill vite`, which takes down the server the user i
 working in.
 
 ```bash
-pnpm dev > /tmp/midway-verify.log 2>&1 & MIDWAY_PID=$!
+mkdir -p .claude/skills/verify/artifacts
+pnpm dev > .claude/skills/verify/artifacts/dev.log 2>&1 & MIDWAY_PID=$!
 # ... later ...
 kill $MIDWAY_PID
 ```
@@ -65,7 +76,7 @@ Read-only. Run it first whenever anything looks off; all four must pass before
 a drive is worth anything.
 
 ```bash
-BASE=http://localhost:3200
+BASE=$(grep '^BETTER_AUTH_URL=' .dev.vars | cut -d= -f2)
 
 # 1. It's up, and it's Midway.
 curl -s $BASE/login | grep -aq 'Open a booth\|Sign in' && echo "OK  serving Midway"
@@ -86,7 +97,7 @@ is broken and every other result is suspect.
 
 ## Drive
 
-`BASE=http://localhost:3200` throughout. Sign-up doubles as the session factory —
+`BASE=$(grep '^BETTER_AUTH_URL=' .dev.vars | cut -d= -f2)` throughout. Sign-up doubles as the session factory —
 better-auth returns a session cookie straight from `/api/auth/sign-up/email`, so
 no sign-in round trip is needed to get an authenticated agent.
 
@@ -176,7 +187,8 @@ curl -s -X POST $BASE/cdn-cgi/local/explorer/api/local/observability/query \
   the name and append a 4-char suffix on collision. Read the slug back from the
   response; do not assume `slugify(name)`.
 - **`@verify.test` leads land in the user's own dev data.** There is one local D1
-  and everything shares it. Always use that domain so cleanup can find them.
+  per checkout, and everything run in that checkout shares it. Always use that
+  domain so cleanup can find them.
 
 ## Evidence
 
@@ -223,7 +235,7 @@ pnpm lint          # oxlint, warnings are errors
 pnpm typecheck     # tsc --noEmit
 pnpm test          # prize-draw unit check
 pnpm build         # client + SSR bundles
-pnpm verify        # integration check; needs a server on :3200
+pnpm verify        # integration check; needs this checkout's server on $BASE
 npx wrangler deploy --dry-run   # config + bindings valid, prints env.DB (midway-db)
 ```
 
@@ -268,8 +280,8 @@ ls .claude/skills/verify/artifacts/$RUN
   ```
   It builds the `/_serverFn/<id>` URL, encodes the argument as seroval
   cross-JSON, tries GET and falls back to POST on a 405, and prints
-  `{status, location, result}`. Honours `MIDWAY_URL` (default
-  `http://localhost:3200`). Exits non-zero on a non-2xx status — note that a
+  `{status, location, result}`. Honours `MIDWAY_URL`, else
+  `BETTER_AUTH_URL` from `.dev.vars`, else `http://localhost:3200`. Exits non-zero on a non-2xx status — note that a
   denied call is a 2xx, so check `location` too.
 
 ## Feature map

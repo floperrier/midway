@@ -30,7 +30,7 @@ reads them.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - A live campaign is in `$CID` with slug `verify-drop` under `$BSLUG`, and its
   agency session is in `$COOKIE` (see `campaigns.md`).
 - A second agency session is in `$RIVAL` (see `authentication.md`).

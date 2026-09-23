@@ -13,3 +13,5 @@ dist/
 
 # verification run artifacts
 .claude/skills/verify/artifacts/
+
+.claude/worktrees/

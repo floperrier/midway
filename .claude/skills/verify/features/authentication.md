@@ -28,7 +28,7 @@ sends the browser back to the login page.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - No account exists for the address this recipe generates.
 
 - **Register.** Submit the `Open a booth` form.

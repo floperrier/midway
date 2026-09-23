@@ -8,7 +8,11 @@
  * seeing another's brands, campaigns or leads) and the public capture contract
  * that bespoke games code against.
  */
-const BASE = process.env.MIDWAY_URL ?? "http://localhost:3200";
+import { existsSync, readFileSync } from "node:fs";
+import { parseEnv } from "node:util";
+
+const devVars = existsSync(".dev.vars") ? parseEnv(readFileSync(".dev.vars", "utf8")) : {};
+const BASE = process.env.MIDWAY_URL ?? devVars.BETTER_AUTH_URL ?? "http://localhost:3200";
 
 const results = [];
 const check = (name, pass, detail = "") => results.push({ name, pass, detail });

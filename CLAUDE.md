@@ -17,4 +17,5 @@ Stack, commandes, archi : voir README.md.
 ## Règles
 - Dépendances épinglées exactement (politique `minimumReleaseAge`) : pas de `pnpm update` global.
 - Changement de schéma : modifier `src/db/schema.ts`, puis `pnpm db:generate`. Ne jamais éditer une migration existante.
+- Dans un worktree neuf, lancer `pnpm setup:worktree` avant `pnpm dev` ou `verify`.
 - La CI exécute `pnpm lint && pnpm typecheck && pnpm test && pnpm build` ; tout doit passer.

@@ -21,11 +21,18 @@ pnpm db:migrate:local
 pnpm dev                 # http://localhost:3200
 ```
 
-Port 3200 is pinned with `strictPort`. `BETTER_AUTH_SECRET` and
+The port is pinned with `strictPort`. `BETTER_AUTH_SECRET` and
 `BETTER_AUTH_URL` are required — `getAuth()` throws when either is missing,
 because better-auth otherwise falls back to a published default secret that
 would let anyone forge a session. `BETTER_AUTH_URL` must match the dev URL
-exactly.
+exactly, and the dev port is read from it (3200 when `.dev.vars` is absent).
+
+**Git worktrees.** Run `pnpm setup:worktree` once in a fresh worktree. It
+installs dependencies, writes a `.dev.vars` whose `BETTER_AUTH_URL` points at a
+free port in 3201-3999 chosen from the worktree path, migrates and seeds that
+worktree's own D1 (`.wrangler/state` is per checkout), and prints the URL.
+`pnpm dev` and `pnpm verify` then pick the origin up from `.dev.vars`, so several
+worktrees run side by side. The main checkout is refused and keeps port 3200.
 
 | Command | What it does |
 |---|---|
@@ -82,18 +89,11 @@ and prefetch.
 `/play/mudwtr/black-friday-drop`; they skip cleanly without one.
 
 ```bash
-UID=$(npx wrangler d1 execute midway-db --local --json \
-  --command "SELECT id FROM user LIMIT 1" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s)[0].results[0].id))')
-
-npx wrangler d1 execute midway-db --local --command "
-INSERT INTO brand (id,owner_id,name,slug,primary_color,accent_color,esp_provider,created_at,updated_at)
-VALUES ('b1','$UID','MUD\\WTR','mudwtr','#2d1b12','#e8c39e','klaviyo',1758556800000,1758556800000);
-INSERT INTO campaign (id,brand_id,name,slug,mechanic,tier,status,prizes,play_count,created_at,updated_at)
-VALUES ('c1','b1','Black Friday drop','black-friday-drop','flick','custom','live',
-  '[{\"label\":\"10% off\",\"code\":\"MUD10\",\"weight\":60},{\"label\":\"20% off\",\"code\":\"MUD20\",\"weight\":30},{\"label\":\"Free tin\",\"code\":\"MUDTIN\",\"weight\":10}]',
-  0,1758556800000,1758556800000);
-"
+npx wrangler d1 execute midway-db --local --file scripts/seed.sql
 ```
+
+The seed owns the demo through a fixed `seed-owner` user (`seed@midway.local`)
+and uses `INSERT OR IGNORE`, so it is safe to rerun.
 
 ## Deploying
 

@@ -18,7 +18,11 @@
  * function ever takes a Date, Map or stream, import seroval properly instead of
  * extending this.
  */
-const BASE = process.env.MIDWAY_URL ?? "http://localhost:3200";
+import { existsSync, readFileSync } from "node:fs";
+import { parseEnv } from "node:util";
+
+const devVars = existsSync(".dev.vars") ? parseEnv(readFileSync(".dev.vars", "utf8")) : {};
+const BASE = process.env.MIDWAY_URL ?? devVars.BETTER_AUTH_URL ?? "http://localhost:3200";
 const SRC = "/src/server/functions.ts";
 
 const url = (name) =>

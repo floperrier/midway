@@ -34,7 +34,7 @@ prize ladder and the status actually get set.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - An agency session is in `$COOKIE` and one of its brands is in `$BID` / `$BSLUG`
   (see `brands.md`).
 - Valid values: mechanic `spin|scratch|flick|drag|shoot`, tier

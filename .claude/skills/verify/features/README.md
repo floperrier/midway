@@ -17,11 +17,13 @@ file as the recipe.
 
 ## Baseline preconditions
 
-- A Midway dev server answers `http://localhost:3200`. Reuse the one already
-  running; the port is pinned with `strictPort`, and a second instance would
-  share the same local D1 anyway.
-- `.dev.vars` exists with a real `BETTER_AUTH_SECRET`, and `BETTER_AUTH_URL` and
-  `TRUSTED_ORIGINS` both exactly `http://localhost:3200`.
+- `.dev.vars` exists with a real `BETTER_AUTH_SECRET`, and `TRUSTED_ORIGINS`
+  equal to `BETTER_AUTH_URL`. In a fresh worktree, `pnpm setup:worktree` writes it.
+- `BASE=$(grep '^BETTER_AUTH_URL=' .dev.vars | cut -d= -f2)` is set, and this
+  checkout's dev server answers `$BASE`. Reuse the one already running in this
+  checkout; the port is pinned with `strictPort`, and a second instance in the
+  same checkout would share its local D1 anyway. Another worktree has its own
+  port and its own D1.
 - `npx wrangler d1 migrations list midway-db --local` reports nothing to apply.
 - `node` and `npx wrangler` are on `PATH`; run every command from the repo root.
 - Run the Doctor section of `../SKILL.md` and require all four checks to pass.

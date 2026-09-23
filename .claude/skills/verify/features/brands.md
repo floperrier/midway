@@ -27,7 +27,7 @@ its campaigns and captured leads with it.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - A fresh agency session is in `$COOKIE` (see `authentication.md`).
 
 - **Empty state.** Open `/brands`. Run

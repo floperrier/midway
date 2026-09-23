@@ -31,7 +31,7 @@ the contract this feature really covers.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - A **live** campaign exists with a three-prize ladder. Follow `campaigns.md` and
   keep `$BSLUG` and `$CID`; the URL below is `$BASE/play/$BSLUG/verify-drop`.
 - `API=$BASE/api/play/$BSLUG/verify-drop`.

@@ -24,7 +24,7 @@ a page, and not by guessing an id and calling the RPC directly.
 
 Preconditions:
 
-- Doctor passes and `BASE=http://localhost:3200` is set.
+- Doctor passes and `BASE` is set as in `../SKILL.md` Drive.
 - Two agency sessions exist. Follow `authentication.md` twice and keep both
   cookies as `$COOKIE` (the owner) and `$RIVAL`.
 - The owner has one live campaign; follow `campaigns.md` and keep `$BID`, `$CID`

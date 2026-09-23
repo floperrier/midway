@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Numerals",
+    "family": "display",
+    "note": "Anton through the .numeral class: weight 400, 0.01em tracking, tabular figures. The Tailwind text size beside it sets the line height.",
+    "styles": [
+      { "name": "numeral-48", "fontSize": "48px", "lineHeight": "48px", "fontWeight": 400, "letterSpacing": "0.01em", "sample": "Dashboard", "usage": "Page titles and ScoreStrip values from md up; the booth headline (text-5xl)." },
+      { "name": "numeral-36", "fontSize": "36px", "lineHeight": "40px", "fontWeight": 400, "letterSpacing": "0.01em", "sample": "2,418", "usage": "Page titles and ScoreStrip values below md (text-4xl)." },
+      { "name": "numeral-30", "fontSize": "30px", "lineHeight": "36px", "fontWeight": 400, "letterSpacing": "0.01em", "sample": "Where do we send it?", "usage": "AuthShell's MIDWAY wordmark; the booth's capture headline (text-3xl)." },
+      { "name": "numeral-24", "fontSize": "24px", "lineHeight": "32px", "fontWeight": 400, "letterSpacing": "0.01em", "sample": "MIDWAY", "usage": "Sidebar wordmark; lead counts in the campaigns list (text-2xl)." },
+      { "name": "numeral-20", "fontSize": "20px", "lineHeight": "28px", "fontWeight": 400, "letterSpacing": "0.01em", "sample": "1,204", "usage": "Mobile header wordmark; lead counts on the dashboard (text-xl)." }
+    ]
+  },
+  {
+    "name": "Text",
+    "family": "sans",
+    "note": "Archivo 400 to 700. The console runs small: 14px is the working size.",
+    "styles": [
+      { "name": "lead", "fontSize": "24px", "lineHeight": 1.375, "fontWeight": 400, "sample": "Branded games that trade a discount for an email address.", "usage": "AuthShell's promise line from md up (text-2xl leading-snug); 18px below md." },
+      { "name": "heading", "fontSize": "18px", "lineHeight": "28px", "fontWeight": 600, "sample": "Recent campaigns", "usage": "Section headings inside a page (text-lg font-semibold)." },
+      { "name": "body", "fontSize": "16px", "lineHeight": "24px", "fontWeight": 400, "sample": "No campaigns yet", "usage": "Input text below md; empty-state titles at 500 (text-base)." },
+      { "name": "body-sm", "fontSize": "14px", "lineHeight": "20px", "fontWeight": 400, "sample": "Every booth you have running, and what it has collected.", "usage": "The working size: list rows, table cells, inputs from md up (text-sm)." },
+      { "name": "intro", "fontSize": "14px", "lineHeight": 1.625, "fontWeight": 400, "sample": "One game per campaign. Set the prizes, take it live, watch the list fill.", "usage": "Page intros and empty-state explanations, in muted-foreground (text-sm leading-relaxed)." },
+      { "name": "label", "fontSize": "14px", "lineHeight": "20px", "fontWeight": 500, "sample": "Campaign name", "usage": "Field labels, button text, list row titles (text-sm font-medium)." },
+      { "name": "caption", "fontSize": "12px", "lineHeight": "16px", "fontWeight": 400, "sample": "At least 8 characters.", "usage": "Hints, ScoreStrip notes, list meta, the signed-in email (text-xs)." },
+      { "name": "score-label", "fontSize": "12px", "lineHeight": "16px", "fontWeight": 400, "letterSpacing": "0.025em", "sample": "Signup rate", "usage": "ScoreStrip labels, sentence case (text-xs tracking-wide)." },
+      { "name": "chip", "fontSize": "12px", "lineHeight": "16px", "fontWeight": 600, "sample": "live", "usage": "StatusChip, lowercase as stored (text-xs font-semibold)." }
+    ]
+  },
+  {
+    "name": "Booth",
+    "family": "sans",
+    "note": "The reference booth's own sizes. A bespoke build swaps in the brand's faces and keeps the hierarchy.",
+    "styles": [
+      { "name": "booth-cta", "fontSize": "18px", "lineHeight": "28px", "fontWeight": 700, "sample": "Reveal my code", "usage": "Play and Reveal my code (text-lg font-bold)." },
+      { "name": "booth-code", "fontSize": "24px", "lineHeight": "32px", "fontWeight": 700, "letterSpacing": "0.1em", "sample": "QUILL20", "usage": "The revealed discount code on its ticket (text-2xl font-bold tracking-widest)." }
+    ]
+  },
+  {
+    "name": "Code",
+    "family": "mono",
+    "styles": [
+      { "name": "code", "fontSize": "12px", "lineHeight": "16px", "fontWeight": 400, "sample": "/play/quillfen/harvest-drop", "usage": "The game link and discount codes in the leads table (text-xs inside <code>)." }
+    ]
+  }
+]

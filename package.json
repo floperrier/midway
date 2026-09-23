@@ -16,7 +16,8 @@
     "db:migrate:remote": "wrangler d1 migrations apply midway-db --remote",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "verify": "node scripts/verify.mjs",
-    "setup:worktree": "bash scripts/setup-worktree.sh"
+    "setup:worktree": "bash scripts/setup-worktree.sh",
+    "design-system": "node scripts/design-system/build.mjs"
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "1.7.5",

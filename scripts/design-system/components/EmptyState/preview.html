@@ -1,0 +1,22 @@
+<!-- @dsCard group="Feedback" height=396 width=760 page subtitle="The full panel a new agency sees first, and the compact line inside a form" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>EmptyState</title></head>
+<body>
+<div id="root" class="grid gap-6 p-6"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(React.Fragment, null,
+      h("div", { className: "border-border rounded-md border border-dashed px-6 py-12 text-center" },
+        h("p", { className: "text-base font-medium" }, "No campaigns yet"),
+        h("p", { className: "text-muted-foreground mx-auto mt-2 max-w-[46ch] text-sm leading-relaxed" },
+          "Add a brand first, then build its first game. The game collects the email, Midway keeps the list."),
+        h(M.Button, { asChild: true, className: "mt-6" }, h("a", { href: "#brands" }, "Add a brand"))),
+      h("p", { className: "text-muted-foreground border-border rounded-md border border-dashed px-5 py-8 text-center text-sm" },
+        "No prizes yet. A game with nothing to win captures nothing.")
+    )
+  );
+</script>
+</body>
+</html>

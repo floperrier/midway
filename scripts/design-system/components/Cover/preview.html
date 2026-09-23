@@ -1,0 +1,67 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Midway</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); overflow: hidden; }
+  .cover { position: relative; height: 288px; overflow: hidden; }
+  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art svg { display: block; width: 480px; height: 288px; overflow: hidden; }
+  .booth { fill: var(--booth); }
+  .ink { fill: var(--foreground); }
+  .ticket { fill: var(--ticket); }
+  .flag { fill: var(--flag); }
+  .ground { fill: var(--background); }
+  .blk { rx: var(--radius-md); }
+  .plate { rx: var(--radius-sm); }
+  .words { position: absolute; left: var(--space-6); bottom: var(--space-6); max-width: 440px; }
+  .name { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 120px; line-height: .9; letter-spacing: .01em; color: var(--foreground); }
+  .tag { margin: var(--space-2) 0 0 4px; font-size: 14px; line-height: 20px; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      booth 256x240 slab bled off the top, the identity colour and the largest; foreground 208x128 bled off the right, the enamel ink; ticket 432x64 roll bled off the right, the one bright note; flag 24x24 once, since it only means destructive. About 40% of 960x288.
+  arrangement one tall slab with an ink satellite, a ticket roll crossing the slab's foot; space-4 gutters, the roll space-8 above the bottom edge.
+  pattern     a ticket roll, from "ticket stock, the one bright note" and the Ticket icon that marks Campaigns: perforations at a 96px pitch (2 x space-12), each two space-2 notches and three space-0.5 punch holes, cut in whatever lies behind.
+  scales      sides in space-2 multiples (256, 240, 208, 128, 432, 64, 24); gutters space-4; corners radius-md, the flag radius-sm; notch r = space-2, hole r = space-0.5.
+-->
+<rect class="booth blk" x="16" y="-8" width="256" height="240" rx="4"/>
+<rect class="ink blk" x="288" y="48" width="208" height="128" rx="4"/>
+<rect class="flag plate" x="288" y="16" width="24" height="24" rx="2"/>
+<rect class="ticket blk" x="64" y="192" width="432" height="64" rx="4"/>
+<circle class="booth" cx="160" cy="192" r="8"/>
+<circle class="booth" cx="256" cy="192" r="8"/>
+<circle class="ground" cx="352" cy="192" r="8"/>
+<circle class="ground" cx="448" cy="192" r="8"/>
+<circle class="ground" cx="160" cy="256" r="8"/>
+<circle class="ground" cx="256" cy="256" r="8"/>
+<circle class="ground" cx="352" cy="256" r="8"/>
+<circle class="ground" cx="448" cy="256" r="8"/>
+<circle class="booth" cx="160" cy="208" r="2"/>
+<circle class="booth" cx="160" cy="224" r="2"/>
+<circle class="ground" cx="160" cy="240" r="2"/>
+<circle class="booth" cx="256" cy="208" r="2"/>
+<circle class="booth" cx="256" cy="224" r="2"/>
+<circle class="ground" cx="256" cy="240" r="2"/>
+<circle class="ground" cx="352" cy="208" r="2"/>
+<circle class="ground" cx="352" cy="224" r="2"/>
+<circle class="ground" cx="352" cy="240" r="2"/>
+<circle class="ground" cx="448" cy="208" r="2"/>
+<circle class="ground" cx="448" cy="224" r="2"/>
+<circle class="ground" cx="448" cy="240" r="2"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Midway</h1>
+<p class="tag">Branded games that trade a discount for an email address.</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- @dsCard group="Layout" height=600 width=1040 subtitle="The sign-in page" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AuthShell</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(M.AuthShell, {
+      title: "Sign in",
+      intro: "Pick up where you left off.",
+      footer: h(React.Fragment, null, "No account yet? ", h("a", { href: "#register", className: "text-foreground underline" }, "Create one"))
+    },
+      h(M.ValidatedForm, { className: "grid gap-5", onSubmit: function (e) { e.preventDefault(); } },
+        h(M.Field, { label: "Email", error: "Enter a valid email address." },
+          h(M.Input, { type: "email", name: "email", required: true, autoComplete: "email", spellCheck: false, autoCapitalize: "none", placeholder: "you@agency.com" })),
+        h(M.Field, { label: "Password", error: "Enter your password." },
+          h(M.Input, { type: "password", name: "password", required: true, autoComplete: "current-password" })),
+        h(M.Button, { type: "submit", className: "w-full" }, "Sign in")
+      )
+    )
+  );
+</script>
+</body>
+</html>

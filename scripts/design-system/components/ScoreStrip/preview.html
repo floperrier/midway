@@ -1,0 +1,19 @@
+<!-- @dsCard group="Data" height=220 width=1040 subtitle="The dashboard's four numbers, example values" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ScoreStrip</title></head>
+<body>
+<div id="root" class="p-6"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(M.ScoreStrip, { scores: [
+      { label: "Leads captured", value: "2,418" },
+      { label: "Signup rate", value: "11.2%", note: "Merchants running stock spin wheels report 5–14%." },
+      { label: "Live campaigns", value: 3 },
+      { label: "Brands", value: 4 }
+    ] })
+  );
+</script>
+</body>
+</html>

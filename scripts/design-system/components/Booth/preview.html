@@ -1,0 +1,60 @@
+<!-- @dsCard group="Pages" height=560 width=1200 page subtitle="Idle, capture, won and closed, in an example brand's colours" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Booth</title></head>
+<body>
+<div class="grid grid-cols-4 gap-4 p-6">
+  <figure class="m-0 grid gap-2">
+    <figcaption class="text-muted-foreground text-xs">Idle</figcaption>
+    <div class="grid h-[460px] place-items-center px-6 py-12" style="background:#3a1d3f;color:#f6b98a">
+      <div class="w-full max-w-md text-center">
+        <p class="mb-8 text-sm tracking-wide opacity-80">Quillfen Tea</p>
+        <h2 class="numeral text-5xl leading-none">Harvest drop</h2>
+        <p class="mt-4 text-sm opacity-80">Up for grabs: 10% off · 20% off · Free sampler</p>
+        <button type="button" class="mt-10 rounded-sm px-8 py-4 text-lg font-bold focus-visible:outline-2 focus-visible:outline-offset-4" style="background:#f6b98a;color:#3a1d3f">Play</button>
+      </div>
+    </div>
+  </figure>
+  <figure class="m-0 grid gap-2">
+    <figcaption class="text-muted-foreground text-xs">Capture</figcaption>
+    <div class="grid h-[460px] place-items-center px-6 py-12" style="background:#3a1d3f;color:#f6b98a">
+      <form class="field grid w-full max-w-md gap-4 text-left">
+        <h2 class="numeral text-center text-3xl">Where do we send it?</h2>
+        <div class="grid gap-1.5">
+          <label for="booth-email" class="text-sm font-medium">Email</label>
+          <input id="booth-email" type="email" name="email" required autocomplete="email" spellcheck="false" autocapitalize="none" value="sam@example.com" class="rounded-sm border-2 border-current/30 bg-white/95 px-3 py-2.5 text-base text-neutral-900 focus-visible:border-current focus-visible:outline-none">
+        </div>
+        <div class="grid gap-1.5">
+          <label for="booth-phone" class="text-sm font-medium">Phone <span class="opacity-70">(optional)</span></label>
+          <input id="booth-phone" type="tel" name="phone" autocomplete="tel" class="rounded-sm border-2 border-current/30 bg-white/95 px-3 py-2.5 text-base text-neutral-900 focus-visible:border-current focus-visible:outline-none">
+        </div>
+        <button type="submit" class="mt-2 rounded-sm px-8 py-4 text-lg font-bold disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4" style="background:#f6b98a;color:#3a1d3f">Reveal my code</button>
+      </form>
+    </div>
+  </figure>
+  <figure class="m-0 grid gap-2">
+    <figcaption class="text-muted-foreground text-xs">Won</figcaption>
+    <div class="grid h-[460px] place-items-center px-6 py-12" style="background:#3a1d3f;color:#f6b98a">
+      <div class="w-full max-w-md text-center">
+        <p class="mb-8 text-sm tracking-wide opacity-80">Quillfen Tea</p>
+        <h2 class="numeral text-5xl">20% off</h2>
+        <p class="mt-4 text-sm opacity-80">Use this at checkout.</p>
+        <p class="mt-6 inline-block rounded-sm px-5 py-3 text-2xl font-bold tracking-widest" style="background:#f6b98a;color:#3a1d3f">QUILL20</p>
+      </div>
+    </div>
+  </figure>
+  <figure class="m-0 grid gap-2">
+    <figcaption class="text-muted-foreground text-xs">Closed</figcaption>
+    <div class="border-border grid h-[460px] place-items-center border px-6 text-center">
+      <div>
+        <h2 class="numeral text-4xl">This booth is closed</h2>
+        <p class="text-muted-foreground mt-3 text-sm">The game you're looking for isn't running right now.</p>
+      </div>
+    </div>
+  </figure>
+</div>
+<script>
+  document.querySelector("form").addEventListener("submit", function (e) { e.preventDefault(); });
+</script>
+</body>
+</html>

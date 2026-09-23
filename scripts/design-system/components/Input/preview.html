@@ -1,0 +1,22 @@
+<!-- @dsCard group="Forms" height=184 subtitle="Email, URL, colour and number, as the brand and prize forms use them" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Input</title></head>
+<body>
+<div id="root" class="grid max-w-md gap-3 p-6"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(React.Fragment, null,
+      h(M.Input, { id: "in-email", name: "email", type: "email", "aria-label": "Email", placeholder: "you@agency.com", autoComplete: "email", spellCheck: false, autoCapitalize: "none" }),
+      h(M.Input, { id: "in-logo", name: "logoUrl", type: "url", "aria-label": "Logo URL", placeholder: "https://cdn.example.com/logo.svg", spellCheck: false }),
+      h("div", { className: "flex items-center gap-3" },
+        h(M.Input, { id: "in-primary", name: "primaryColor", type: "color", "aria-label": "Primary colour", defaultValue: "#3a1d3f", className: "h-9 w-20 p-1" }),
+        h(M.Input, { id: "in-accent", name: "accentColor", type: "color", "aria-label": "Accent colour", defaultValue: "#f6b98a", className: "h-9 w-20 p-1" }),
+        h(M.Input, { id: "in-weight", name: "weight", type: "number", "aria-label": "Prize 1 weight", min: 1, max: 100, defaultValue: 60, className: "w-24" })
+      )
+    )
+  );
+</script>
+</body>
+</html>

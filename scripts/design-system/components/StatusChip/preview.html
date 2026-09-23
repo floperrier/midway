@@ -1,0 +1,18 @@
+<!-- @dsCard group="Status" height=72 subtitle="live, draft, ended" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StatusChip</title></head>
+<body>
+<div id="root" class="flex flex-wrap items-center gap-3 p-6"></div>
+<script>
+  var M = window.Midway, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    h(React.Fragment, null,
+      h(M.StatusChip, { status: "live" }),
+      h(M.StatusChip, { status: "draft" }),
+      h(M.StatusChip, { status: "ended" })
+    )
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.output/
+.wrangler/
+.vinxi/
+.tanstack/
+.dev.vars
+.env
+.DS_Store
+
+# tooling
+.serena/
+
+# verification run artifacts
+.claude/skills/verify/artifacts/
+
+.claude/worktrees/
